@@ -1,3 +1,16 @@
+Mat <- matrix(c(1,2,3,4,5,6), ncol=2, byrow = TRUE)
+Mat[1,2]
+Mat.bycol <- matrix(c(1,2,3,4,5,6), ncol=2, byrow = FALSE)
+
+Mat.bycol[1,2] # element in row 1 col 2
+Mat.bycol[1,] # all elements in row 1
+Mat.bycol[,2] # all elements in col 2
+
+
+
+
+
+
 datW <- read.csv("q:\\Students\\dgathogo\\a02\\2011124.csv")
 str(datW)
 
@@ -6,13 +19,13 @@ datW$year <- as.numeric(format(datW$dateF,"%Y"))
 str(datW)
 
 #character vector
-char_vector <- c('a', 'b','y', 'h', 'q')
+grades <- c('a', 'b','e', 'c', 'd')
 
 #numeric vector
-num_vector <- c(13.5, 9.9, 6.32, 12.0, 13.75)
+heights <- c(13.5, 9.9, 6.32, 12.0, 13.75)
 
 #integer vector
-int_vector <- as.integer(c(1, 6, 38, 9, 13))
+ages <- as.integer(c(19, 6, 38, 9, 13))
 
 #factor vector
-fact_vector <- as.factor(c('1998', '2000','1994', '1998', '1995'))
+years <- as.factor(c('1998', '2000','1994', '1998', '1995'))
