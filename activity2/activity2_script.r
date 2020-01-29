@@ -12,7 +12,7 @@ char_vector <- c('a', 'b','y', 'h', 'q')
 num_vector <- c(13.5, 9.9, 6.32, 12.0, 13.75)
 
 #integer vector
-int_vector <- c(1, 6, 38, 9, 13)
+int_vector <- as.integer(c(1, 6, 38, 9, 13))
 
 #factor vector
-fact_vector <- c('a', 'b','y', 'h', 'q')
+fact_vector <- as.factor(c('1998', '2000','1994', '1998', '1995'))
