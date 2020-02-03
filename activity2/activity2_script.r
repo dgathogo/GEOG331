@@ -28,9 +28,9 @@ datW$TAVE <- datW$TMIN + ((datW$TMAX - datW$TMIN)/2)
 
 datW$siteN <- as.numeric(datW$NAME)
 
-#make a histogram for the first site in our levels, Aberdeen
-
-
+averageTemp <- aggregate(datW$TAVE, by=list(datW$NAME), FUN="mean",na.rm=TRUE)
+colnames(averageTemp) <- c("NAME","MAAT")
+averageTemp
 
 #Question 4 
 # plot all histograms on the same window
@@ -137,7 +137,7 @@ abline(v = mean(datW$TAVE[datW$siteN == 4],na.rm=TRUE) + sd(datW$TAVE[datW$siteN
        lty = 3,
        lwd = 3)
 
-
+par(mfrow=c(1,1))
 
 #Question 6
 #make a histogram for the first site in our levels
@@ -175,7 +175,6 @@ temp <- qnorm(0.95,
 prob <- 1 - pnorm(temp - 4,
                   mean(datW$TAVE[datW$siteN == 1], na.rm = TRUE),
                   sd(datW$TAVE[datW$siteN == 1], na.rm = TRUE))
-prob
 
 # Question 7
 
@@ -187,6 +186,7 @@ hist(datW$PRCP[datW$siteN == 1],
      col="grey50",
      border="white")
 
+# Question 8
 annual_prcp <- aggregate(datW$PRCP, by=list('year'=datW$year, 'siteN'=datW$siteN), FUN=sum, na.rm=T)
 hist(annual_prcp[annual_prcp$siteN == 3,]$x,
      freq = F,
@@ -196,5 +196,14 @@ hist(annual_prcp[annual_prcp$siteN == 3,]$x,
      col = "grey50",
      border = "white")
      
-mean_temp_prcp <- annual_prcp[annual_prcp$siteN == 3,]$x
+# Question 9
+mean_prcp_temp <- aggregate(annual_prcp$x, by=list('siteN'=annual_prcp$siteN), FUN=mean, na.rm=T)
+colnames(mean_prcp_temp)[2] <- "prcp"
+mean_prcp_temp$temp <- averageTemp$MAAT
+mean_prcp_temp
+
+
+
+
+
 
