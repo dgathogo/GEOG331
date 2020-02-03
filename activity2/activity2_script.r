@@ -187,16 +187,14 @@ hist(datW$PRCP[datW$siteN == 1],
      col="grey50",
      border="white")
 
-t <- aggregate(datW$PRCP[datW$siteN == 1], na.rm = TRUE,by=list(datW$year), FUN=sum)
-tapply(g = (datW$PRCP[datW$siteN == 1], na.rm = TRUE),datW$year, FUN=sum)
-
-
-
-hist(sum(datW$PRCP[datW$siteN == 1]),
-     freq=FALSE, 
-     main = paste(levels(datW$NAME)[1]),
-     xlab = "Annual precipitation", 
-     ylab="Relative frequency",
-     col="grey50",
-     border="white")
+annual_prcp <- aggregate(datW$PRCP, by=list('year'=datW$year, 'siteN'=datW$siteN), FUN=sum, na.rm=T)
+hist(annual_prcp[annual_prcp$siteN == 3,]$x,
+     freq = F,
+     main = paste(levels(datW$NAME)[3]),
+     xlab = "Annual precipitation",
+     ylab = "Relative frequency",
+     col = "grey50",
+     border = "white")
+     
+mean_temp_prcp <- annual_prcp[annual_prcp$siteN == 3,]$x
 
