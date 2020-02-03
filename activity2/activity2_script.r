@@ -1,8 +1,8 @@
 
 #Question 1
 
-datW <- read.csv("/Volumes/class/Geog331/Students/dgathogo/a02/2011124.csv")
-#datW <- read.csv("q:\\Students\\dgathogo\\a02\\2011124.csv")
+# datW <- read.csv("/Volumes/class/Geog331/Students/dgathogo/a02/2011124.csv")
+datW <- read.csv("q:\\Students\\dgathogo\\a02\\2011124.csv")
 str(datW)
 
 # Question 2
