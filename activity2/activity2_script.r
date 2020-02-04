@@ -1,7 +1,5 @@
 
 #Question 1
-
-# datW <- read.csv("/Volumes/class/Geog331/Students/dgathogo/a02/2011124.csv")
 datW <- read.csv("q:\\Students\\dgathogo\\a02\\2011124.csv")
 str(datW)
 
@@ -33,6 +31,7 @@ colnames(averageTemp) <- c("NAME","MAAT")
 averageTemp
 
 #Question 4 
+
 # plot all histograms on the same window
 par(mfrow=c(2,2))
 
@@ -137,9 +136,10 @@ abline(v = mean(datW$TAVE[datW$siteN == 4],na.rm=TRUE) + sd(datW$TAVE[datW$siteN
        lty = 3,
        lwd = 3)
 
+# Plot just one item in the entire space
 par(mfrow=c(1,1))
 
-#Question 6
+#Question 5
 #make a histogram for the first site in our levels
 h1 <- hist(datW$TAVE[datW$siteN == 1],
            freq=FALSE, 
@@ -148,6 +148,7 @@ h1 <- hist(datW$TAVE[datW$siteN == 1],
            ylab="Relative frequency",
            col="grey50",
            border="white")
+
 #the seq function generates a sequence of numbers that we can use to plot the normal across the range of temperature values
 x.plot <- seq(-10,30, length.out = 100)
 #the dnorm function will produce the probability density based on a mean and standard deviation.
