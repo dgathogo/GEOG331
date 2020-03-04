@@ -2,13 +2,13 @@ library(lubridate)
 library(dplyr)
 library(ggplot2)
 #read in streamflow data
-#datH <- read.csv("q:\\Students\\dgathogo\\a05\\stream_flow_data.csv", na.strings = c("Eqp"))
+datH <- read.csv("q:\\Students\\dgathogo\\a05\\stream_flow_data.csv", na.strings = c("Eqp"))
 #read in precipitation data
 #hourly precipitation is in mm
-#datP <- read.csv("q:\\Students\\dgathogo\\a05\\2049867.csv")  
+datP <- read.csv("q:\\Students\\dgathogo\\a05\\2049867.csv")  
 
-datH <- read.csv("/Volumes/class/Geog331/Students/dgathogo/a05/stream_flow_data.csv", na.strings = c("Eqp"))
-datP <- read.csv("/Volumes/class/Geog331/Students/dgathogo/a05/2049867.csv")  
+#datH <- read.csv("/Volumes/class/Geog331/Students/dgathogo/a05/stream_flow_data.csv", na.strings = c("Eqp"))
+#datP <- read.csv("/Volumes/class/Geog331/Students/dgathogo/a05/2049867.csv")  
 
 #only use most reliable measurements
 datD <- datH[datH$discharge.flag == "A",]
@@ -124,30 +124,28 @@ legend("topright", c("2017","mean","1 standard deviation"), #legend items
 
 # Question 7
 
-datP.aggregated <- aggregate(datP, list(datP$year, datP$doy), length)
-
-fullDay <- datP.aggregated[datP.aggregated$doy==24,]
+fullDay <- datP %>% 
+        group_by(datP$doy, datP$year) %>%
+        tally() %>%
+        filter(n==24)
+colnames(fullDay) <- c("year", "doy", "count")
 
 plot(datD$decYear, datD$discharge, 
-     type="l",
+     type="p",
      lwd=2,
      xlab = "Year",
      ylab = expression(paste("Discharge ft"^"3 ","sec"^"-1")),
-     col = "black",
-     ylim=c(0,400),
+     col = ifelse(datP$year == datD$year, "red", "black"),
+     ylim=c(0,450),
      xaxs="i", yaxs ="i",
      )
 par(new=T)
 
-plot(x=datP.aggregated$decYear,
-     y= rep(300, length(fullDay$decYear)),
-     xlab="",
-     ylab="",
-     type = "p",
-     col = "blue",
-     axes = F,
-     pch=c(NA,17)
-)
+legend("topright", c("full day of obs."), #legend items
+       lwd=c(2,NA),#lines
+       col = c("red"),#fill boxes
+       pch = c(NA,18), #symbols
+       bty="n")#no legend border
 
 # Question 8
 #subsest discharge and precipitation within range of interest
