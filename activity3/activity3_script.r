@@ -102,8 +102,7 @@ library(lubridate)
                             ifelse(datW$precipitation > 5, NA, datW$wind.speed))
  
  for (i in 1 : length(datW$precipitation)) {
-    assert(!(datW$precipitation[i]  >= 2 & datW$lightning.acvitivy[i] >0 & is.na(datW$wind.speed2[i])), "Unfiltered wind speed data")
-    assert(!(datW$precipitation[i] > 5 & is.na(datW$wind.speed2[i])), "Unfiltered wind speed data") 
+    assert(!(((datW$precipitation[i]  >= 2 & datW$lightning.acvitivy[i] >0) || datW$precipitation[i] > 5) & is.na(datW$wind.speed2[i])), "Unfiltered wind speed data")
  }
  
  plot(datW$DD, datW$wind.speed2, xlab = "Day of Year", ylab = "Wind speed", type = 'b')
