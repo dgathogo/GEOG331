@@ -126,7 +126,7 @@ legend("topright", c("2017","mean","1 standard deviation"), #legend items
 
 datP.aggregated <- aggregate(datP, list(datP$year, datP$doy), length)
 
-fullDay <- datD.aggregated[datP.aggregated$doy==24,]
+fullDay <- datP.aggregated[datP.aggregated$doy==24,]
 
 plot(datD$decYear, datD$discharge, 
      type="l",
@@ -136,14 +136,16 @@ plot(datD$decYear, datD$discharge,
      col = "black",
      ylim=c(0,400),
      xaxs="i", yaxs ="i",
-     axes=F
      )
 par(new=T)
 
-plot(x=fullDay$decYear,
+plot(x=datP.aggregated$decYear,
      y= rep(300, length(fullDay$decYear)),
+     xlab="",
+     ylab="",
      type = "p",
      col = "blue",
+     axes = F,
      pch=c(NA,17)
 )
 
