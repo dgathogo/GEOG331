@@ -159,10 +159,7 @@ NDVIfit <- calc(NDVIstack,fun)
 plot(NDVIfit, axes=FALSE)
 
 
-meanChange <- zonal(NDVIfit, #NDVI function to summarize
-                    glacZones,#raster with zones
-                    "mean")#function to apply
-head(meanChange)
+
 
 #buffer glaciers
 glacier500m <- gBuffer(g1966p,#data to buffer
@@ -181,6 +178,11 @@ glacRaster <- rasterize(g1966p, NDVIraster[[1]], field=g1966p@data$GLACNAME, bac
 #subtract buffer from original glacier
 glacZones <- buffRaster - glacRaster
 plot(glacZones)
+
+meanChange <- zonal(NDVIfit, #NDVI function to summarize
+                    glacZones,#raster with zones
+                    "mean")#function to apply
+head(meanChange)
 
 # Question 11
 g2015p@data$NDVIcol <- ifelse(g2015p@data$NDVImean<0.4,"blue","red")
