@@ -159,6 +159,9 @@ NDVIfit <- calc(NDVIstack,fun)
 plot(NDVIfit, axes=FALSE)
 
 
-
+meanChange <- zonal(NDVIfit, #NDVI function to summarize
+                    glacZones,#raster with zones
+                    "mean")#function to apply
+head(meanChange)
 
 
